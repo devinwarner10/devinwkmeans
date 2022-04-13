@@ -11,9 +11,21 @@
 #' @export
 #'
 
-plot_clusters <- function(cols, kmeans){
-  plot(cols,
-       col = kmeans$cluster,
-       pch = 20, cex = 3)
-  points(kmeans$centers, pch = 4, cex = 4, lwd = 4)
+plot_clusters <- function(data, xcol, ycol, kmeans){
+    dat <- tibble("x1" = data[,xcol], "x2" = data[,ycol],
+                  "Species" = data$Species , "Cluster" = as.factor(kmeans$cluster))
+    ggplot() + 
+      geom_point(data = dat,
+                 mapping = aes(x = x1, y = x2,
+                               col = Species,shape = Cluster)) + 
+      xlab(xcol) +
+      ylab(ycol) + 
+      geom_point(mapping = aes_string(x = kmeans$centers[,xcol], 
+                                      y = kmeans$centers[,ycol]),
+                 color = "black", size = 6, shape = "cross") +
+      scale_color_manual(values = c("blue3", "violetred2", "springgreen3"))
 }
+
+
+# 
+# 

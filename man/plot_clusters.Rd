@@ -4,12 +4,12 @@
 \alias{plot_clusters}
 \title{Plots two-dimensional clusters}
 \usage{
-plot_clusters(cols, kmeans)
+plot_clusters(data, xcol, ycol, kmeans)
 }
 \arguments{
-\item{cols}{The columns to be plotted}
-
 \item{kmeans}{Result of the kmeans algorithm}
+
+\item{cols}{The columns to be plotted}
 }
 \value{
 plot
