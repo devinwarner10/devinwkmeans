@@ -8,6 +8,7 @@
 run_kmeans_shiny <- function() {
   library(tidyverse)
   library(caret)
+  library(DT)
   appDir <- system.file("clusters_shiny.R", package = "devinwkmeans")
   if (appDir == "") {
     stop("Could not find myapp. Try re-installing `devinwkmeans`.", call. = FALSE)

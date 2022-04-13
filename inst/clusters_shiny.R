@@ -53,7 +53,12 @@ ui <- fluidPage(
              
              mainPanel(
                plotOutput('plot3')
+             ),
+             
+             fluidRow(
+               DTOutput('table1')
              )
+             
     )
   )
 )
@@ -80,6 +85,11 @@ server <- function(input, output, session) {
   output$plot3 <- renderPlot({
     plot_pca(input$xcol3, input$ycol3)
   })
+  
+  output$table1 <- renderDT(
+    pca_iris(0),
+    options = list(dom = '')
+  )
 }
 
 shinyApp(ui = ui, server = server)
