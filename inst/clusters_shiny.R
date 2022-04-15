@@ -5,6 +5,7 @@
 #'
 #'
 
+umap_iris <- umap(iris[,1:4])
 
 ui <- fluidPage(
   
@@ -45,6 +46,8 @@ ui <- fluidPage(
     ),
     
     tabPanel("Dimension Reduction",
+        navbarPage("Method",
+          tabPanel("Pricnciple Component",
              sidebarPanel(
                selectInput('xcol3', 'X Variable', names(pca_iris()[,-5])),
                selectInput('ycol3', 'Y Variable', names(pca_iris()[,-5]), 
@@ -57,7 +60,16 @@ ui <- fluidPage(
              
              fluidRow(
                DTOutput('table1')
+             ),
+             fluidRow(
+               DTOutput('table2')
              )
+          ),
+          
+          tabPanel("UMAP",
+                plotOutput('plot4')
+          )
+        )
              
     )
   )
@@ -86,8 +98,20 @@ server <- function(input, output, session) {
     plot_pca(input$xcol3, input$ycol3)
   })
   
+  output$plot4 <- renderPlot({
+    data.frame(umap_iris$layout, Species=iris$Species) %>%
+      ggplot(aes(X1,X2, fill = Species))+
+      geom_point(cex=3, pch=21) +
+      coord_fixed(ratio = 1)
+  })
+  
   output$table1 <- renderDT(
     pca_iris(0),
+    options = list(dom = '')
+  )
+  
+  output$table2 <- renderDT(
+    pca_iris(-1),
     options = list(dom = '')
   )
 }
