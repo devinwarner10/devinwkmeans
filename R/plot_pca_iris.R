@@ -9,7 +9,7 @@
 #'
 
 
-plot_pca <- function(xcol, ycol){
+plot_pca_iris <- function(xcol, ycol){
   data <- as.data.frame(pca_iris())
   data %>%
     ggplot(aes(x = data[,xcol], y = data[,ycol], color = Species)) +

@@ -95,7 +95,7 @@ server <- function(input, output, session) {
   })
   
   output$plot3 <- renderPlot({
-    plot_pca(input$xcol3, input$ycol3)
+    plot_pca_iris(input$xcol3, input$ycol3)
   })
   
   output$plot4 <- renderPlot({

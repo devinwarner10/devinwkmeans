@@ -4,7 +4,7 @@
 \alias{pca_iris}
 \title{Runs the Principal Component tab}
 \usage{
-pca_iris()
+pca_iris(vars = 1)
 }
 \description{
 Runs the Principal Component tab
